@@ -1,23 +1,17 @@
 <?php
 /**
- * @var $this Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
+ * @var Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint $this
  */
-
-  $mage_ver = Mage::getVersion();
-  $min_version = '1.8';
-  $max_version = '1.9.0.1';
-
-  if( $mage_ver < $min_version || $mage_ver > $max_version ){
 ?>
-
+<?php if(!$this->isSupportedVersion()) : ?>
   <div class="box">
     <div>
         <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
 
         <br>
         <h2 style='color: red'>Sorry, but we don't currently support your Magento version.</h2>
-        <b>Your Magento Version:</b> <code><?= $mage_ver ?></code><br>
-        <b>Supported Versions:</b> <code><?= $min_version ?> - <?= $max_version ?></code><br><br>
+        <b>Your Magento Version:</b> <code><?php echo $this->getMagentoVersion(); ?></code><br>
+        <b>Supported Versions:</b> <code><?php echo $this->getMinVersion(); ?> - <?php echo $this->getMaxVersion(); ?></code><br><br>
 
         We are working hard to add support for more versions. So stay tuned!
 
@@ -25,110 +19,44 @@
 
     </div>
   </div>
+<?php else : ?>
+    <div class="box">
+        <div>
+            <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
 
-<?php
-    return;
-  }
+            <fieldset>
+                <h2>REST API Credentials</h2>
+                <b>Consumer Key:</b> <code><?php echo $this->getConsumerKey(); ?></code><br><br>
+                <b>Consumer Secret:</b> <code><?php echo $this->getConsumerSecret(); ?></code><br><br>
+                <b>Access Token:</b> <code><?php echo $this->getAccessToken(); ?></code><br><br>
+                <b>Access Secret:</b> <code><?php echo $this->getAccessSecret(); ?></code><br><br>
+            </fieldset>
+             <fieldset>
+                <h2>SOAP API Credentials</h2>
+                <b>Api User:</b> <code><?php echo $this->getSoapUser(); ?></code><br><br>
+                <b>API Key:</b> <code><?php echo $this->getApiKey(); ?></code><br><br>
+            </fieldset>
+            <a onclick="$('sellbrite_connection_form').submit();" style='display: inline-block; color: white; border-radius: 5px; padding: 10px 20px; background: #6fcc37; -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); font-weight: bold; font-size: 14px; text-decoration: none;' onmouseover="this.style.cursor='pointer'">Connect to Sellbrite</a>
+            <div style='clear: both;'></div>
 
-  $api_key = Mage::getStoreConfig('sellbrite_api/config/api_key');
-  $site_url = Mage::helper('core/url')->getHomeUrl();
-
-  if( !$api_key || strlen($api_key) < 32 ){
-    $api_key = md5(uniqid(rand(), true));
-
-    $config = new Mage_Core_Model_Config();
-    $config ->saveConfig('sellbrite_api/config/api_key', $api_key, 'default', 0);
-  }
-
-
-
-
-
-  function createApiRole(){
-    //create new role
-    $role = Mage::getModel("api/roles")
-      ->setName('Sellbrite')
-      ->setRoleType('G')
-      ->save();
-
-    //give "all" privileges to role
-    Mage::getModel("api/rules")
-      ->setRoleId($role->getId())
-      ->setResources(array("all"))
-      ->saveRel();
-
-    return $role;
-  }
-
-  function createApiUser($api_key, $role){
-    $apiuser = Mage::getModel('api/user')
-      ->setData(array(
-        'username'             => 'Sellbrite',
-        'firstname'            => 'Sellbrite',
-        'lastname'             => 'Sellbrite',
-        'email'                => 'magento@sellbrite.com',
-        'api_key'              => $api_key,
-        'api_key_confirmation' => $api_key,
-        'is_active'            => 1,
-        'user_roles'           => '',
-        'assigned_user_role'   => '',
-        'role_name'            => '',
-        'roles'                => array($role->getId()) // your created custom role
-      ));
-    $apiuser->save();
-
-    //assign role to user
-    $apiuser
-      ->setRoleIds( array($role->getId()) )  // your created custom role
-      ->setRoleUserId($apiuser->getUserId())
-      ->saveRelations();
-
-    return $apiuser;
-  }
-
-   $roles = Mage::getModel('api/roles')->getCollection();
-   $role = null;
-   foreach($roles as $r){
-      $data = $r->getData();
-      if($data['role_name'] == 'Sellbrite'){
-        $role = $r;
-      }
-   }
-
-  if (!$role) {
-    $role = createApiRole();
-  }
-
-
-  //create user if it does not exist
-  $apiuser = Mage::getModel('api/user');
-  $apiuser->loadByUsername('Sellbrite');
-  if ($apiuser->getId()) {
-    //update api key
-    $apiuser->setApiKey($api_key);
-
-    $apiuser->save();
-  }else{
-    createApiUser($api_key, $role);
-  }
-
-
-
-?>
-<div class="box">
-    <div>
-        <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
-
-        <br>
-        <b>Your API Key:</b> <code><?= $api_key ?></code><br><br>
-        <b>Your Magento Version:</b> <code><?= $mage_ver ?></code><br><br>
-
-        <a href='https://app.sellbrite.com/merchants/auth/magento?api_key=<?= $api_key ?>&site_url=<?= $site_url ?>' style='display: inline-block; color: white; border-radius: 5px; padding: 10px 20px; background: #6fcc37; -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
-box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); font-weight: bold; font-size: 14px; text-decoration: none;'>Connect to Sellbrite</a>
-
-        <div style='clear: both;'></div>
-
+        </div>
     </div>
-</div>
 
 
+    <script type="text/javascript">
+        document.observe('dom:loaded', function(){
+            $('config_edit_form').insert({
+                'after': '<form method="post" action="<?php echo $this->getEndPointUrl(); ?>" id="sellbrite_connection_form">'
+                + '<input type="hidden" name="consumer_key" value="<?php echo $this->getConsumerKey(); ?>" />'
+                + '<input type="hidden" name="consumer_secret" value="<?php echo $this->getConsumerSecret(); ?>" />'
+                + '<input type="hidden" name="access_token" value="<?php echo $this->getAccessToken(); ?>" />'
+                + '<input type="hidden" name="access_secret" value="<?php echo $this->getAccessSecret(); ?>" />'
+                + '<input type="hidden" name="api_key" value="<?php echo $this->getApiKey(); ?>" />'
+                + '<input type="hidden" name="api_user" value="<?php echo $this->getSoapUser(); ?>" />'
+                + '<input type="hidden" name="site_url" value="<?php echo $this->getSiteURL(); ?>" />'
+                + '</form>'
+            });
+        });
+    </script>
+<?php endif; ?>

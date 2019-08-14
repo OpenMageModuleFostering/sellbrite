@@ -4,6 +4,10 @@
         <Sellbrite_Api>
             <active>true</active>
             <codePool>community</codePool>
+            <depends>
+                <Mage_Catalog />
+                <Mage_Oauth />
+            </depends>
         </Sellbrite_Api>
     </modules>
 </config>

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Sellbrite_Api>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </Sellbrite_Api>
     </modules>
     <global>
@@ -12,10 +12,26 @@
             </sellbrite_api>
         </helpers>
         <models>
+            <sellbrite_api>
+                <class>Sellbrite_Api_Model</class>
+                <resourceModel>sellbrite_api_resource</resourceModel>
+            </sellbrite_api>
+            <sellbrite_api_resource>
+                <class>Sellbrite_Api_Model_Resource</class>
+            </sellbrite_api_resource>
+            <oauth>
+                <rewrite>
+                    <token>Sellbrite_Api_Model_Token</token>
+                </rewrite>
+            </oauth>
+            <oauth_resource>
+                <rewrite>
+                    <token>Sellbrite_Api_Model_Resource_Token</token>
+                </rewrite>
+            </oauth_resource>
             <catalog>
                 <rewrite>
-                    <product_api>Sellbrite_Api_Model_Catalog_Product_Api</product_api>
-                    <product_api_v2>Sellbrite_Api_Model_Catalog_Product_Api_V2</product_api_v2>
+                    <api2_product_rest_admin_v1>Sellbrite_Api_Model_Catalog_Api2_Product_Rest_Admin_V1_Interceptor</api2_product_rest_admin_v1>
                 </rewrite>
             </catalog>
         </models>
@@ -24,12 +40,46 @@
                 <class>Sellbrite_Api_Block</class>
             </sellbrite_api>
         </blocks>
+        <resources>
+            <sellbrite_setup>
+                <setup>
+                    <module>Sellbrite_Api</module>
+                </setup>
+            </sellbrite_setup>
+        </resources>
+        <catalog_product_list_item_plugins>
+            <!--
+                Plugins configuration format:
+                <method_name>
+                    <before|after|around>
+                        <some_plugin_class_name>module/class_name</some_plugin_class_name>
+                    </before|after|around>
+                </method_name>
+            -->
+            <_retrieveCollection>
+                <after>
+                    <product_type_plugin>sellbrite_api/catalog_productCollection_plugin</product_type_plugin>
+                </after>
+            </_retrieveCollection>
+            <_retrieve>
+                <after>
+                    <product_type_plugin>sellbrite_api/catalog_product_plugin</product_type_plugin>
+                </after>
+            </_retrieve>
+        </catalog_product_list_item_plugins>
+        <compositions>
+            <!--
+                Composition configuration format:
+                <some_plugin_class_name> - reference to plugins configuration
+                    <some_item_name>module/class_name</some_item_name>
+                </some_plugin_class_name>
+            -->
+            <product_type_plugin>
+                <configurable>sellbrite_api/catalog_product_format_productType_configurable</configurable>
+            </product_type_plugin>
+        </compositions>
     </global>
     <default>
-        <sellbrite_api>
-            <config>
-                <api_key><![CDATA[//]]></api_key>
-            </config>
-        </sellbrite_api>
+        <sellbrite_endpoint_url>https://app.sellbrite.com/merchants/magento/init</sellbrite_endpoint_url>
     </default>
 </config>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <tabs>
-        <sellbrite translate="label">
+        <sellbrite translate="label" module="sellbrite_api">
             <label><![CDATA[<div><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" alt="Sellbrite" title="Sellbrite" height="23" style="display:block;" /></div>]]></label>
             <sort_order>1000</sort_order>
         </sellbrite>

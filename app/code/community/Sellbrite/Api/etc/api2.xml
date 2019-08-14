@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resources>
+            <product translate="title" module="api2">
+                <attributes translate="variations variation_keys" module="sellbrite_api">
+                    <variations>Product Variations</variations>
+                    <variation_keys>Product Variation Keys</variation_keys>
+                </attributes>
+            </product>>
+            <order>
+                <attributes translate="updated_at state" module="sellbrite_api">
+                    <updated_at>Order Update Date</updated_at>
+                    <state>Order State</state>
+                </attributes>
+            </order>
+        </resources>
+    </api2>
+</config>

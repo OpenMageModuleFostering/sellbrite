@@ -1,14 +1,8 @@
 <?php
-
-class Sellbrite_Api_Helper_Data extends Mage_Core_Helper_Abstract
+/**
+ * Class Sellbrite_Api_Helper_Data
+ */
+class Sellbrite_Api_Helper_Data extends Mage_Core_Helper_Data
 {
-    /**
-     * @param string $attrSetName
-     * @return string
-     */
-    public function getAttributeSetIdByName($attrSetName, $entityType = 'catalog_product')
-    {
-        return Mage::getSingleton('catalog/config')
-            ->getAttributeSetId($entityType, $attrSetName);
-    }
+
 }
