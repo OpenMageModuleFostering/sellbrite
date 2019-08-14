@@ -21,6 +21,7 @@ class Sellbrite_Api_Model_Catalog_Product_Api extends Mage_Catalog_Model_Product
 
         $pageNum = isset($filters['page']) ? array_pop($filters['page']) : 1;
         $pageSize = isset($filters['limit']) ? array_pop($filters['limit']) : 50;
+
         unset($filters['page'], $filters['limit']);
         $collection->setPage($pageNum, $pageSize);
 
@@ -61,9 +62,9 @@ class Sellbrite_Api_Model_Catalog_Product_Api extends Mage_Catalog_Model_Product
                 $parent_ids = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild($product->getId());
                 $data['sb_configurable_parent_product_ids'] = $parent_ids;
             }
-
             $result[] = $this->infoResult($data, $product);;
         }
+
         return $result;
     }
 
@@ -107,6 +108,7 @@ class Sellbrite_Api_Model_Catalog_Product_Api extends Mage_Catalog_Model_Product
                 foreach ($attributesData as $attribute) {
                     $options[$k]['code'] = $attribute['attribute_code'];
                     foreach ($attribute['values'] as $value) {
+                        $value['value_text'] = 'as';
                         $value['attribute_code'] = $attribute['attribute_code'];
                         $options[$k]['options'][] = $value;
                     }

@@ -50,7 +50,7 @@
                     <xsd:element name="options_container" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="image_url" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="qty" type="xsd:string" minOccurs="0"/>
-                    <xsd:element name="additional_attributes" type="typens:associativeArray" minOccurs="0"/>
+                    <xsd:element name="=" type="typens:associativeArray" minOccurs="0"/>
                     <xsd:element name="sb_configurable_parent_product_ids" type="typens:ArrayOfString" minOccurs="0"/>
                     <xsd:element name="sb_configurable_child_product_ids" type="typens:ArrayOfString" minOccurs="0"/>
                     <xsd:element name="sb_configurable_products_data" type="typens:childrenEntityArray" minOccurs="0"/>
@@ -70,7 +70,7 @@
                 <xsd:sequence>
                     <xsd:element name="product_id" type="xsd:int" minOccurs="0" />
                     <xsd:element name="sku" type="xsd:string" minOccurs="0" />
-                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:childrenEntityOptionsArray" />
+                    <xsd:element name="options" type="typens:childrenEntityOptionsArray" minOccurs="0" />
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="childrenEntityOptionsArray">
@@ -94,7 +94,26 @@
             <xsd:complexType name="configurableOptionsEntity">
                 <xsd:sequence>
                     <xsd:element name="code" type="xsd:string" minOccurs="0" />
-                    <xsd:element name="options" type="typens:associativeArray" minOccurs="0"/>
+                    <xsd:element name="options" type="typens:optionsEntityArray" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="optionsEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:optionsEntity" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="optionsEntity">
+                <xsd:sequence>
+                    <xsd:element name="product_super_attribute_id" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="value_index" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="value_text" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="label" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="default_label" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="store_label" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="is_percent" type="xsd:int" minOccurs="0"/>
+                    <xsd:element name="pricing_value" type="xsd:double" minOccurs="0"/>
+                    <xsd:element name="use_default_value" type="xsd:boolean" minOccurs="0"/>
+                    <xsd:element name="attribute_code" type="xsd:string" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:element name="sellbriteProductListRequestParam">
