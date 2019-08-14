@@ -6,7 +6,7 @@
   $api_key = Mage::getStoreConfig('sellbrite_api/config/api_key');
   $site_url = Mage::helper('core/url')->getHomeUrl();
 
-  if( !($api_key && $api_key.length > 0) ){
+  if( !($api_key && strlen($api_key) > 0) ){
     $api_key = md5(uniqid(rand(), true));
 
     $config = new Mage_Core_Model_Config();
