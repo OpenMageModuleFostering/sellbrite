@@ -6,7 +6,7 @@
   $api_key = Mage::getStoreConfig('sellbrite_api/config/api_key');
   $site_url = Mage::helper('core/url')->getHomeUrl();
 
-  if( !($api_key && strlen($api_key) > 0) ){
+  if( !$api_key || strlen($api_key) < 32 ){
     $api_key = md5(uniqid(rand(), true));
 
     $config = new Mage_Core_Model_Config();
@@ -90,9 +90,7 @@
 ?>
 <div class="box">
     <div>
-        <a href="https://sellbrite.com" target="_blank">
-            <img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" />
-        </a><br>
+        <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
 
         <br>
         <b>Your API Key:</b> <code><?= $api_key ?></code><br><br>
@@ -104,4 +102,5 @@ box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); font-weight: bold; font-size: 14px; 
 
     </div>
 </div>
+
 

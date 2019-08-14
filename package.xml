@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <package>
     <name>sellbrite</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <stability>stable</stability>
     <license>MIT License</license>
     <channel>community</channel>
     <extends/>
-    <summary>Multi-channel selling, simplified.</summary>
+    <summary>Simplified Multi-channel selling.</summary>
     <description>List your products on more channels, access more customers and maximize your sales, quickly and easily.</description>
-    <notes>Bug fix for .length PHP Notice</notes>
+    <notes>Validate API keys</notes>
     <authors><author><name>Sellbrite</name><user>machineboy2045</user><email>machineboy2045@gmail.com</email></author></authors>
-    <date>2014-10-09</date>
-    <time>17:59:45</time>
-    <contents><target name="magecommunity"><dir name="Sellbrite"><dir name="Api"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><dir name="Fieldset"><file name="Hint.php" hash="eee09d85dc2ddf0dc49a9b3c788eb2cd"/></dir></dir></dir></dir></dir><dir name="Helper"><dir name="Catalog"><file name="Product.php" hash="1e0567fd4fc6da68635c5153749c1659"/></dir><file name="Data.php" hash="10776abef0d3e369c6dec5566de5dfed"/></dir><dir name="Model"><dir name="Catalog"><dir name="Product"><dir name="Api"><file name="V2.php" hash="001e4766191ba2e6bb630fc2ee9d015d"/></dir><file name="Api.php" hash="bb344211ad4623774c10ec85ed5e7458"/></dir></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="ba6e97e5e14d3b00fd281cf1c07c3958"/><file name="config.xml" hash="5fa352976f061989324bfb6f3b28261c"/><file name="system.xml" hash="5b61898dd5be81781c6b908738eaa6fb"/><file name="wsdl.xml" hash="22bfa736fad32b8ed5013cccb4aabc9d"/><file name="wsi.xml" hash="f06f9b1374aac0f2585d3fc1c916d7ec"/></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="base"><dir name="default"><dir name="template"><dir name="sellbrite"><dir name="api"><dir name="system"><dir name="config"><dir name="fieldset"><file name="hint.phtml" hash="6d15f0d50298f6beeee419beed973708"/></dir></dir></dir></dir></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Sellbrite_Api.xml" hash="eb836727e6b1e328091e7ccd9003294f"/></dir></target></contents>
+    <date>2014-11-06</date>
+    <time>18:29:28</time>
+    <contents><target name="magecommunity"><dir name="Sellbrite"><dir name="Api"><dir name="Block"><dir name="Adminhtml"><dir name="System"><dir name="Config"><dir name="Fieldset"><file name="Hint.php" hash="eee09d85dc2ddf0dc49a9b3c788eb2cd"/></dir></dir></dir></dir></dir><dir name="Helper"><dir name="Catalog"><file name="Product.php" hash="1e0567fd4fc6da68635c5153749c1659"/></dir><file name="Data.php" hash="10776abef0d3e369c6dec5566de5dfed"/></dir><dir name="Model"><dir name="Catalog"><dir name="Product"><dir name="Api"><file name="V2.php" hash="001e4766191ba2e6bb630fc2ee9d015d"/></dir><file name="Api.php" hash="bb344211ad4623774c10ec85ed5e7458"/></dir></dir></dir><dir name="etc"><file name="adminhtml.xml" hash="ba6e97e5e14d3b00fd281cf1c07c3958"/><file name="config.xml" hash="5fa352976f061989324bfb6f3b28261c"/><file name="system.xml" hash="5b61898dd5be81781c6b908738eaa6fb"/><file name="wsdl.xml" hash="22bfa736fad32b8ed5013cccb4aabc9d"/><file name="wsi.xml" hash="f06f9b1374aac0f2585d3fc1c916d7ec"/></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="base"><dir name="default"><dir name="template"><dir name="sellbrite"><dir name="api"><dir name="system"><dir name="config"><dir name="fieldset"><file name="hint.phtml" hash="80fd4f698fd3c94f1d5865806fcf8a28"/></dir></dir></dir></dir></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Sellbrite_Api.xml" hash="eb836727e6b1e328091e7ccd9003294f"/></dir></target></contents>
     <compatible/>
     <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
 </package>
