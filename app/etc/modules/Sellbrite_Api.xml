@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sellbrite_Api>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Sellbrite_Api>
+    </modules>
+</config>

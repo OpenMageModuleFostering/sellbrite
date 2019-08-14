@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sellbrite_Api>
+            <version>1.0.0</version>
+        </Sellbrite_Api>
+    </modules>
+    <global>
+        <helpers>
+            <sellbrite_api>
+                <class>Sellbrite_Api_Helper</class>
+            </sellbrite_api>
+        </helpers>
+        <models>
+            <catalog>
+                <rewrite>
+                    <product_api>Sellbrite_Api_Model_Catalog_Product_Api</product_api>
+                    <product_api_v2>Sellbrite_Api_Model_Catalog_Product_Api_V2</product_api_v2>
+                </rewrite>
+            </catalog>
+        </models>
+        <blocks>
+            <sellbrite_api>
+                <class>Sellbrite_Api_Block</class>
+            </sellbrite_api>
+        </blocks>
+    </global>
+    <default>
+        <sellbrite_api>
+            <config>
+                <api_key><![CDATA[//]]></api_key>
+            </config>
+        </sellbrite_api>
+    </default>
+</config>

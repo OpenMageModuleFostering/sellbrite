@@ -1,0 +1,107 @@
+<?php
+/**
+ * @var $this Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
+ */
+
+  $api_key = Mage::getStoreConfig('sellbrite_api/config/api_key');
+  $site_url = Mage::helper('core/url')->getHomeUrl();
+
+  if( !($api_key && $api_key.length > 0) ){
+    $api_key = md5(uniqid(rand(), true));
+
+    $config = new Mage_Core_Model_Config();
+    $config ->saveConfig('sellbrite_api/config/api_key', $api_key, 'default', 0);
+  }
+
+
+
+
+
+  function createApiRole(){
+    //create new role
+    $role = Mage::getModel("api/roles")
+      ->setName('Sellbrite')
+      ->setRoleType('G')
+      ->save();
+
+    //give "all" privileges to role
+    Mage::getModel("api/rules")
+      ->setRoleId($role->getId())
+      ->setResources(array("all"))
+      ->saveRel();
+
+    return $role;
+  }
+
+  function createApiUser($api_key, $role){
+    $apiuser = Mage::getModel('api/user')
+      ->setData(array(
+        'username'             => 'Sellbrite',
+        'firstname'            => 'Sellbrite',
+        'lastname'             => 'Sellbrite',
+        'email'                => 'magento@sellbrite.com',
+        'api_key'              => $api_key,
+        'api_key_confirmation' => $api_key,
+        'is_active'            => 1,
+        'user_roles'           => '',
+        'assigned_user_role'   => '',
+        'role_name'            => '',
+        'roles'                => array($role->getId()) // your created custom role
+      ));
+    $apiuser->save();
+
+    //assign role to user
+    $apiuser
+      ->setRoleIds( array($role->getId()) )  // your created custom role
+      ->setRoleUserId($apiuser->getUserId())
+      ->saveRelations();
+
+    return $apiuser;
+  }
+
+   $roles = Mage::getModel('api/roles')->getCollection();
+   $role = null;
+   foreach($roles as $r){
+      $data = $r->getData();
+      if($data['role_name'] == 'Sellbrite'){
+        $role = $r;
+      }
+   }
+
+  if (!$role) {
+    $role = createApiRole();
+  }
+
+
+  //create user if it does not exist
+  $apiuser = Mage::getModel('api/user');
+  $apiuser->loadByUsername('Sellbrite');
+  if ($apiuser->getId()) {
+    //update api key
+    $apiuser->setApiKey($api_key);
+
+    $apiuser->save();
+  }else{
+    createApiUser($api_key, $role);
+  }
+
+
+
+?>
+<div class="box">
+    <div>
+        <a href="https://sellbrite.com" target="_blank">
+            <img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" />
+        </a><br>
+
+        <br>
+        <b>Your API Key:</b> <code><?= $api_key ?></code><br><br>
+
+        <a href='https://app.sellbrite.com/merchants/auth/magento?api_key=<?= $api_key ?>&site_url=<?= $site_url ?>' style='display: inline-block; color: white; border-radius: 5px; padding: 10px 20px; background: #6fcc37; -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
+box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); font-weight: bold; font-size: 14px; text-decoration: none;'>Connect to Sellbrite</a>
+
+        <div style='clear: both;'></div>
+
+    </div>
+</div>
+
