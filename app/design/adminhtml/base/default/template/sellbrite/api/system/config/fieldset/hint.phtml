@@ -3,6 +3,33 @@
  * @var $this Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
  */
 
+  $mage_ver = Mage::getVersion();
+  $min_version = '1.8';
+  $max_version = '1.9.0.1';
+
+  if( $mage_ver < $min_version || $mage_ver > $max_version ){
+?>
+
+  <div class="box">
+    <div>
+        <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
+
+        <br>
+        <h2 style='color: red'>Sorry, but we don't currently support your Magento version.</h2>
+        <b>Your Magento Version:</b> <code><?= $mage_ver ?></code><br>
+        <b>Supported Versions:</b> <code><?= $min_version ?> - <?= $max_version ?></code><br><br>
+
+        We are working hard to add support for more versions. So stay tuned!
+
+        <div style='clear: both;'></div>
+
+    </div>
+  </div>
+
+<?php
+    return;
+  }
+
   $api_key = Mage::getStoreConfig('sellbrite_api/config/api_key');
   $site_url = Mage::helper('core/url')->getHomeUrl();
 
@@ -94,6 +121,7 @@
 
         <br>
         <b>Your API Key:</b> <code><?= $api_key ?></code><br><br>
+        <b>Your Magento Version:</b> <code><?= $mage_ver ?></code><br><br>
 
         <a href='https://app.sellbrite.com/merchants/auth/magento?api_key=<?= $api_key ?>&site_url=<?= $site_url ?>' style='display: inline-block; color: white; border-radius: 5px; padding: 10px 20px; background: #6fcc37; -webkit-box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
 box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); font-weight: bold; font-size: 14px; text-decoration: none;'>Connect to Sellbrite</a>
