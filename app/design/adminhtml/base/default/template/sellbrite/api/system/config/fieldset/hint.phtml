@@ -11,7 +11,7 @@
         <br>
         <h2 style='color: red'>Sorry, but we don't currently support your Magento version.</h2>
         <b>Your Magento Version:</b> <code><?php echo $this->getMagentoVersion(); ?></code><br>
-        <b>Supported Versions:</b> <code><?php echo $this->getMinVersion(); ?> - <?php echo $this->getMaxVersion(); ?></code><br><br>
+        <b>Minimum Supported Version:</b> <code><?php echo $this->getMinVersion(); ?></code><br><br>
 
         We are working hard to add support for more versions. So stay tuned!
 
@@ -23,14 +23,6 @@
     <div class="box">
         <div>
             <a href="https://www.sellbrite.com" target="_blank"><img src="http://sellbrite.com/wp-content/uploads/sellbrite-logo-300@2x1.png" height='50' alt="Sellbrite" title="Sellbrite" /></a><br>
-
-            <fieldset>
-                <h2>REST API Credentials</h2>
-                <b>Consumer Key:</b> <code><?php echo $this->getConsumerKey(); ?></code><br><br>
-                <b>Consumer Secret:</b> <code><?php echo $this->getConsumerSecret(); ?></code><br><br>
-                <b>Access Token:</b> <code><?php echo $this->getAccessToken(); ?></code><br><br>
-                <b>Access Secret:</b> <code><?php echo $this->getAccessSecret(); ?></code><br><br>
-            </fieldset>
              <fieldset>
                 <h2>SOAP API Credentials</h2>
                 <b>Api User:</b> <code><?php echo $this->getSoapUser(); ?></code><br><br>
@@ -48,13 +40,10 @@
         document.observe('dom:loaded', function(){
             $('config_edit_form').insert({
                 'after': '<form method="post" action="<?php echo $this->getEndPointUrl(); ?>" id="sellbrite_connection_form">'
-                + '<input type="hidden" name="consumer_key" value="<?php echo $this->getConsumerKey(); ?>" />'
-                + '<input type="hidden" name="consumer_secret" value="<?php echo $this->getConsumerSecret(); ?>" />'
-                + '<input type="hidden" name="access_token" value="<?php echo $this->getAccessToken(); ?>" />'
-                + '<input type="hidden" name="access_secret" value="<?php echo $this->getAccessSecret(); ?>" />'
                 + '<input type="hidden" name="api_key" value="<?php echo $this->getApiKey(); ?>" />'
                 + '<input type="hidden" name="api_user" value="<?php echo $this->getSoapUser(); ?>" />'
-                + '<input type="hidden" name="site_url" value="<?php echo $this->getSiteURL(); ?>" />'
+                + '<input type="hidden" name="uid" value="<?php echo Mage::getBaseUrl(); ?>" />'
+                + '<input type="hidden" name="provider" value="<?php echo 'magento'; ?>" />'
                 + '</form>'
             });
         });

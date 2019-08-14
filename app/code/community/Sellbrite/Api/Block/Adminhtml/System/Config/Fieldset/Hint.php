@@ -16,13 +16,6 @@ class Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
     protected $minVersion = '1.7.0.0';
 
     /**
-     * Maximum supported Magento version
-     *
-     * @var string
-     */
-    protected $maxVersion = '1.9.3.0';
-
-    /**
      * Fieldset render template
      *
      * @var string
@@ -65,16 +58,6 @@ class Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
     }
 
     /**
-     * Get max version
-     *
-     * @return string
-     */
-    public function getMaxVersion()
-    {
-        return $this->maxVersion;
-    }
-
-    /**
      * Check if current Magento version is supported by extension
      *
      * @return bool
@@ -96,46 +79,6 @@ class Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
     }
 
     /**
-     * Get consumer key
-     *
-     * @return string
-     */
-    public function getConsumerKey()
-    {
-        return $this->credentials->getConsumerKey();
-    }
-
-    /**
-     * Get consumer secret
-     *
-     * @return string
-     */
-    public function getConsumerSecret()
-    {
-        return $this->credentials->getConsumerSecret();
-    }
-
-    /**
-     * Get access key
-     *
-     * @return string
-     */
-    public function getAccessToken()
-    {
-        return $this->credentials->getAccessToken();
-    }
-
-    /**
-     * Get access secret
-     *
-     * @return string
-     */
-    public function getAccessSecret()
-    {
-        return $this->credentials->getAccessSecret();
-    }
-
-    /**
      * Get SOAP user
      *
      * @return string
@@ -143,27 +86,6 @@ class Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
     public function getSoapUser()
     {
         return $this->credentials->getSoapUser();
-    }
-
-
-    /**
-     * Get site URL
-     *
-     * @return string
-     */
-    public function getSiteURL()
-    {
-        return $this->credentials->getSiteURL();
-    }
-
-    /**
-     * Get Sellbrite end point URL
-     *
-     * @return string
-     */
-    public function getEndPointUrl()
-    {
-        return $this->credentials->getEndPointUrl();
     }
 
     /**
@@ -174,5 +96,15 @@ class Sellbrite_Api_Block_Adminhtml_System_Config_Fieldset_Hint
     public function getApiKey()
     {
         return $this->credentials->getApiKey();
+    }
+
+    /**
+     * Get Sellbrite end point URL
+     *
+     * @return string
+     */
+    public function getEndPointUrl()
+    {
+        return $this->credentials->getEndPointUrl();
     }
 }

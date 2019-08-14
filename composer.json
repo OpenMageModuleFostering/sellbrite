@@ -1,12 +1,12 @@
 {
     "name": "OpenMageModuleFostering/sellbrite",
     "type": "magento-module",
-    "license": "MIT-License",
+    "license": "MIT",
     "homepage": "",
     "description": "Simplified Multi-channel selling.",
     "authors": [
     {
-        "name": "Sellbrite",
+        "name": "Selbrite",
         "email": "hello@sellbrite.com"
     }
 ],
