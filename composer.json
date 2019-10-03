@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/sellbrite",
+    "name": "OpenMageModuleFostering\/sellbrite",
     "type": "magento-module",
     "license": "MIT",
     "homepage": "",
     "description": "Simplified Multi-channel selling.",
     "authors": [
-    {
-        "name": "Sellbrite",
-        "email": "hello@sellbrite.com"
-    }
-],
+        {
+            "name": "Sellbrite",
+            "email": "hello@sellbrite.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
